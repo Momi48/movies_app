@@ -12,7 +12,11 @@ class Movies extends StatefulWidget {
 }
 
 class _MoviesState extends State<Movies> {
+  final List<String> ratingNames = ['IMBD' ,'Rotten Tomatoes', 'Metacritic'];
+  
   Future <Map<String,dynamic>> getMovies () async {
+ 
+
     final data = await http.get(Uri.parse('https://www.omdbapi.com/?i=tt3896198&apikey=c1cbc0fd'));
     if(data.statusCode == 200){
        final response = jsonDecode(data.body);
@@ -22,7 +26,7 @@ class _MoviesState extends State<Movies> {
     else {
       throw 'An Unexpected Error';
     }
-  
+   
     
   }
   @override
@@ -69,6 +73,7 @@ class _MoviesState extends State<Movies> {
                       rating: rating,
                       director: director,
                       actors: actors,
+                      ratingNames: ratingNames
                       )
                       )
                       );
